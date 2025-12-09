@@ -238,34 +238,34 @@ WHERE {
             <h3>Example Queries (Click to use)</h3>
             <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?country (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE{\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg .\n}\nGROUP BY ?country\nORDER BY DESC(?sdgCount)')">
                 <strong>1. Countries contributing to the most SDGs</strong><br>
-                <code>SELECT ?indicator ?name ?sdgNumber WHERE { ?indicator a sdg:Indicator ; sdg:indicatorName ?name ; sdg:sdgNumber ?sdgNumber . }</code>
+                <code>SELECT ?country (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE{ ?obs a kg:Observation ; kg:hasCountry ?country ; kg:hasSDG ?sdg . } GROUP BY ?country ORDER BY DESC(?sdgCount)</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber 1 .\n}')">
-                <strong>2. SDG 1 indicators (No Poverty)</strong><br>
-                <code>SELECT ?indicator ?name WHERE { ?indicator a sdg:Indicator ; sdg:sdgNumber 1 . }</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT ')">
+                <strong>2. Top 5 countries with the highest total value per SDG</strong><br>
+                <code>SELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT5')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name ?source WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:source ?source ;\n            sdg:hasGlobalCoverage true .\n}\nLIMIT 20')">
-                <strong>3. Indicators with global coverage</strong><br>
-                <code>SELECT ?indicator ?name ?source WHERE { ?indicator a sdg:Indicator ; sdg:hasGlobalCoverage true . }</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg ?country (100 - AVG(?value) AS ?improvementPotential) WHERE {?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY DESC(?improvementPotential)\nLIMIT 10')">
+                <strong>3. Countries with the largest improvement potential per SDG</strong><br>
+                <code>SELECT ?sdg ?country (100 - AVG(?value) AS ?improvementPotential) WHERE {?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY DESC(?improvementPotential)\nLIMIT 10')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?sdgNumber (COUNT(?indicator) AS ?indicatorCount) WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:sdgNumber ?sdgNumber .\n}\nGROUP BY ?sdgNumber\nORDER BY ?sdgNumber')">
-                <strong>4. Count indicators by SDG</strong><br>
-                <code>SELECT ?sdgNumber (COUNT(?indicator) AS ?count) WHERE { ?indicator a sdg:Indicator ; sdg:sdgNumber ?sdgNumber . } GROUP BY ?sdgNumber</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?country ?sdg (AVG(?value) AS ?avgValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?country ?sdg\nORDER BY ?country DESC(?avgValue)')">
+                <strong>4. SDG performance ranking per country</strong><br>
+                <code>SELECT ?country ?sdg (AVG(?value) AS ?avgValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?country ?sdg\nORDER BY ?country DESC(?avgValue)')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT (COUNT(?indicator) AS ?totalIndicators) WHERE {\n  ?indicator a sdg:Indicator .\n}')">
-                <strong>5. Count total indicators</strong><br>
-                <code>SELECT (COUNT(?indicator) AS ?total) WHERE { ?indicator a sdg:Indicator . }</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')">
+                <strong>5. Top 5 indicators that most influence multiple SDGs</strong><br>
+                <code>SELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name ?sdgNumber WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber ?sdgNumber .\n  FILTER (CONTAINS(LCASE(?name), \"poverty\"))\n}\nORDER BY ?sdgNumber')">
-                <strong>6. Search: Poverty indicators</strong><br>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator ?name ?sdgNumber WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber ?sdgNumber .\n  FILTER (CONTAINS(LCASE(?name), \"poverty\"))\n}\nORDER BY ?sdgNumber')">
+                <strong>6. </strong><br>
                 <code>FILTER (CONTAINS(LCASE(?name), \"poverty\"))</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name ?optimum ?greenThreshold ?redThreshold WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:optimum ?optimum ;\n            sdg:greenThreshold ?greenThreshold ;\n            sdg:redThreshold ?redThreshold .\n}\nLIMIT 10')">
-                <strong>7. Get indicators with thresholds</strong><br>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator ?name ?optimum ?greenThreshold ?redThreshold WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:optimum ?optimum ;\n            sdg:greenThreshold ?greenThreshold ;\n            sdg:redThreshold ?redThreshold .\n}\nLIMIT 10')">
+                <strong>7. </strong><br>
                 <code>SELECT ?name ?optimum ?greenThreshold ?redThreshold WHERE { ... }</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?source (COUNT(?indicator) AS ?indicatorCount) WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:source ?source .\n}\nGROUP BY ?source\nORDER BY DESC(?indicatorCount)')">
-                <strong>8. Indicators by source organization</strong><br>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?source (COUNT(?indicator) AS ?indicatorCount) WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:source ?source .\n}\nGROUP BY ?source\nORDER BY DESC(?indicatorCount)')">
+                <strong>8. </strong><br>
                 <code>SELECT ?source (COUNT(?indicator) AS ?count) GROUP BY ?source</code>
             </div>
         </div>
