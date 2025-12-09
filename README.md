@@ -36,13 +36,7 @@ project/
    pip3 install -r requirements.txt
    ````
 
-2. **Generate RDF:**
-   ```bash
-   cd rdf
-   python generate_rdf.py
-   ```
-
-3. **Start Fuseki:**
+2. **Start Fuseki:**
    Install [Fuseki](https://jena.apache.org/documentation/fuseki2/#download-fuseki)
    Run Fuseki server
    ```bash
@@ -52,7 +46,7 @@ project/
    
 ### Note: ttl HAS to be name rdf/output.ttl
 
-4. **Start backend** (choose one):
+3. **Start backend** (choose one):
    - Windows
    ```bash 
    cd backend
@@ -64,7 +58,7 @@ project/
    python3 app.py
    ````
 
-5. **Open frontend:** Open `frontend/index.html` in your browser
+4. **Open frontend:** Open `frontend/index.html` in your browser
 
 ## Note
 
