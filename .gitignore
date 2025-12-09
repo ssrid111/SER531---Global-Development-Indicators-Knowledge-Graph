@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+
+# RDF Output (generated files - can be regenerated)
+rdf/*.ttl
+*.ttl
+
+# Test/Helper scripts
+test-*.py
+check-*.py
+upload-to-fuseki*.ps1
+download-fuseki.ps1
+start-fuseki.bat
+
+# Old/unused RDF generators (keep only generate_sdg_rdf.py)
+rdf/generate_rdf.py
+rdf/generate_sdg_rdf_simple.py
+frontend/generate_gdi_rdf.py
+
+# Documentation - exclude all .md files except README.md
+*.md
+!README.md
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
