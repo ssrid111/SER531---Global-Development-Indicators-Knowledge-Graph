@@ -260,9 +260,9 @@ WHERE {
                 <strong>6. SDGs with the widest variation in values across countries</strong><br>
                 <code>SELECT ?sdg (MAX(?value) - MIN(?value) AS ?range) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?sdg\nORDER BY DESC(?range)')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator ?name ?optimum ?greenThreshold ?redThreshold WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:optimum ?optimum ;\n            sdg:greenThreshold ?greenThreshold ;\n            sdg:redThreshold ?redThreshold .\n}\nLIMIT 10')">
-                <strong>7. </strong><br>
-                <code>SELECT ?name ?optimum ?greenThreshold ?redThreshold WHERE { ... }</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?obs ?country ?indicator ?value WHERE {\n  ?obs a kg:Observation ;\n       kg:hasCountry ?country ;\n       kg:hasIndicator ?indicator ;\n       kg:hasValue ?value . FILTER(?value > 95)}\nORDER BY DESC(?value)')">
+                <strong>7. Outlier detection: observations above 95th percentile</strong><br>
+                <code>SELECT ?obs ?country ?indicator ?value WHERE { ?obs a kg:Observation ; kg:hasCountry ?country ; kg:hasIndicator ?indicator ; kg:hasValue ?value . FILTER(?value > 95)} ORDER BY DESC(?value)')</code>
             </div>
             <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?source (COUNT(?indicator) AS ?indicatorCount) WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:source ?source .\n}\nGROUP BY ?source\nORDER BY DESC(?indicatorCount)')">
                 <strong>8. </strong><br>
