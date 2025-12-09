@@ -217,19 +217,17 @@
         </div>
 
         <textarea id="queryBox">
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX kg: <http://example.org/kg/>
-PREFIX sdg: <http://example.org/sdg/>
+PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>
 
-SELECT ?indicator ?name ?sdgNumber WHERE {
-  ?indicator a sdg:Indicator ;
-            sdg:indicatorName ?name ;
-            sdg:sdgNumber ?sdgNumber .
-}
-ORDER BY ?sdgNumber
-LIMIT 20
+SELECT DISTINCT ?obs ?country ?indicator ?sdg ?location ?value
+WHERE {
+  ?obs a kg:Observation ;
+       kg:hasCountry ?country ;
+       kg:hasIndicator ?indicator ;
+       kg:hasSDG ?sdg ;
+       kg:locatedIn ?location ;
+       kg:hasValue ?value .
+} limit 50
 </textarea>
 
         <br>
@@ -238,8 +236,8 @@ LIMIT 20
 
         <div class="query-examples">
             <h3>Example Queries (Click to use)</h3>
-            <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name ?sdgNumber WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber ?sdgNumber .\n}\nORDER BY ?sdgNumber\nLIMIT 20')">
-                <strong>1. Get all SDG indicators</strong><br>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?country (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE{\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg .\n}\nGROUP BY ?country\nORDER BY DESC(?sdgCount)')">
+                <strong>1. Countries contributing to the most SDGs</strong><br>
                 <code>SELECT ?indicator ?name ?sdgNumber WHERE { ?indicator a sdg:Indicator ; sdg:indicatorName ?name ; sdg:sdgNumber ?sdgNumber . }</code>
             </div>
             <div class="example-query" onclick="setQuery('PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX kg: <http://example.org/kg/>\nPREFIX sdg: <http://example.org/sdg/>\n\nSELECT ?indicator ?name WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber 1 .\n}')">
