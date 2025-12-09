@@ -24,7 +24,7 @@ def run_query():
         
         # Execute SPARQL query
         # Note: Dataset name must be exactly "dataset" (lowercase)
-        sparql = SPARQLWrapper("http://localhost:7200/repositories/SER531_Project")
+        sparql = SPARQLWrapper("http://localhost:7200/repositories/SER531_Project_Final_GDIKG")
         sparql.setQuery(user_query)
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
