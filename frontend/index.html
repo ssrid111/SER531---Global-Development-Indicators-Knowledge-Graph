@@ -264,7 +264,7 @@ WHERE {
                 <strong>7. Outlier detection: observations above 95th percentile</strong><br>
                 <code>SELECT ?obs ?country ?indicator ?value WHERE { ?obs a kg:Observation ; kg:hasCountry ?country ; kg:hasIndicator ?indicator ; kg:hasValue ?value . FILTER(?value > 95)} ORDER BY DESC(?value)')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?obs ?country ?indicator ?location ?value WHERE {\n  ?obs a kg:Observation ;\n  kg:hasCountry ?country ;\n  kg:hasIndicator ?indicator ;\n  kg:hasSDG \"SDG2\" ;\n  kg:locatedIn ?location ;\n  kg:hasValue ?value .\n}')">
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?obs ?country ?indicator ?location ?value WHERE {\n  ?obs a kg:Observation ;\n  kg:hasCountry ?country ;\n  kg:hasIndicator ?indicator ;\n  kg:hasSDG \'SDG2\' ;\n  kg:locatedIn ?location ;\n  kg:hasValue ?value .\n}')">
                 <strong>8. Get all observations for a specific SDG</strong><br>
                 <code>SELECT ?obs ?country ?indicator ?location ?value WHERE {\n  ?obs a kg:Observation ;\n  kg:hasCountry ?country ;\n  kg:hasIndicator ?indicator ;\n  kg:hasSDG \"SDG2\" ;\n  kg:locatedIn ?location ;\n  kg:hasValue ?value .\n}')</code>
             </div>
