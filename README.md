@@ -2,7 +2,7 @@
 
 A complete working knowledge graph system with RDF generation, SPARQL querying, and web interface.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 project/
@@ -20,15 +20,15 @@ project/
 │── SETUP.md                      # Detailed setup instructions
 ```
 
-## ✨ Features
+## Features
 
-- ✅ **Data Cleaning + RDF Generation** - Convert CSV/JSON to RDF triples
-- ✅ **Fuseki Integration** - Load and query RDF data via Apache Jena Fuseki
-- ✅ **SPARQL Query Execution** - Execute queries through REST API
-- ✅ **Backend API** -  Python (Flask) 
-- ✅ **Frontend UI** - Interactive web interface for running queries
+- **Data Cleaning + RDF Generation** - Convert CSV/JSON to RDF triples
+- **Fuseki Integration** - Load and query RDF data via Apache Jena Fuseki
+- **SPARQL Query Execution** - Execute queries through REST API
+- **Backend API** -  Python (Flask) 
+- **Frontend UI** - Interactive web interface for running queries
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install dependencies:**
    ```bash
@@ -54,6 +54,6 @@ project/
 
 See `SETUP.md` for detailed instructions.
 
-## 📝 Note
+## Note
 
 This implementation provides everything **except the ontology**. You can plug in your own ontology later and everything will work seamlessly.
