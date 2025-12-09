@@ -6,18 +6,15 @@ A complete working knowledge graph system with RDF generation, SPARQL querying, 
 
 ```
 project/
-│── data/
-│     └── cities.csv              # Sample CSV data
-│── rdf/
-│     └── generate_rdf.py         # Python script to convert CSV to RDF
-│     └── output.ttl              # Generated RDF/Turtle file
-│     └── SPARQL_QUERIES.md       # Example SPARQL queries
-│── frontend/
-│     └── index.html              # Web UI for SPARQL queries
 │── backend/
 │     └── app.py                  # Python backend (Flask)
+│── data/
+│     └── Final Data.csv          # CSV data
+│── rdf/
+│     └── generate_sdg_rdf.py     # Python script to convert CSV to RDF
+│── frontend/
+│     └── index.html              # Web UI for SPARQL queries
 │── requirements.txt              # Python dependencies
-│── SETUP.md                      # Detailed setup instructions
 ```
 
 ## Features
@@ -29,11 +26,15 @@ project/
 - **Frontend UI** - Interactive web interface for running queries
 
 ## Quick Start
-
 1. **Install dependencies:**
-   ```bash
+    - Windows
+   ```bash 
    pip install -r requirements.txt
-   ```
+   ````
+    - MacOS
+   ```bash 
+   pip3 install -r requirements.txt
+   ````
 
 2. **Generate RDF:**
    ```bash
@@ -42,17 +43,28 @@ project/
    ```
 
 3. **Start Fuseki:**
+   Install [Fuseki](https://jena.apache.org/documentation/fuseki2/#download-fuseki)
+   Run Fuseki server
    ```bash
-   ./fuseki-server --update --mem /dataset
+   ./fuseki-server
    ```
    Then upload `rdf/output.ttl` at `http://localhost:3030`
+   
+### Note: ttl HAS to be name rdf/output.ttl
 
 4. **Start backend** (choose one):
-   - Python: `cd backend && python app.py`
+   - Windows
+   ```bash 
+   cd backend
+   python app.py
+   ````
+    - MacOS
+   ```bash 
+   cd backend
+   python3 app.py
+   ````
 
 5. **Open frontend:** Open `frontend/index.html` in your browser
-
-See `SETUP.md` for detailed instructions.
 
 ## Note
 
