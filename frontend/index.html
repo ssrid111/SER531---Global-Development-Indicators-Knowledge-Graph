@@ -240,9 +240,9 @@ WHERE {
                 <strong>1. Countries contributing to the most SDGs</strong><br>
                 <code>SELECT ?country (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE{ ?obs a kg:Observation ; kg:hasCountry ?country ; kg:hasSDG ?sdg . } GROUP BY ?country ORDER BY DESC(?sdgCount)</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT ')">
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n       kg:hasCountry ?country ;\n       kg:hasSDG ?sdg ;\n       kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT 5')">
                 <strong>2. Top 5 countries with the highest total value per SDG</strong><br>
-                <code>SELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT5')</code>
+                <code>SELECT ?sdg ?country (SUM(?value) AS ?totalValue) WHERE {\n  ?obs a kg:Observation ;\n       kg:hasCountry ?country ;\n       kg:hasSDG ?sdg ;\n       kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY ?sdg DESC(?totalValue)\nLIMIT 5')</code>
             </div>
             <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg ?country (100 - AVG(?value) AS ?improvementPotential) WHERE {?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .\n}\nGROUP BY ?sdg ?country\nORDER BY DESC(?improvementPotential)\nLIMIT 10')">
                 <strong>3. Countries with the largest improvement potential per SDG</strong><br>
@@ -252,13 +252,13 @@ WHERE {
                 <strong>4. SDG performance ranking per country</strong><br>
                 <code>SELECT ?country ?sdg (AVG(?value) AS ?avgValue) WHERE {\n  ?obs a kg:Observation ;\n            kg:hasCountry ?country ;\n            kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?country ?sdg\nORDER BY ?country DESC(?avgValue)')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')">
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .}\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')">
                 <strong>5. Top 5 indicators that most influence multiple SDGs</strong><br>
-                <code>SELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')</code>
+                <code>SELECT ?indicator (COUNT(DISTINCT ?sdg) AS ?sdgCount) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasIndicator ?indicator ;\n            kg:hasSDG ?sdg .}\nGROUP BY ?indicator\nORDER BY DESC(?sdgCount)}\nLIMIT 5')</code>
             </div>
-            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator ?name ?sdgNumber WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:sdgNumber ?sdgNumber .\n  FILTER (CONTAINS(LCASE(?name), \"poverty\"))\n}\nORDER BY ?sdgNumber')">
-                <strong>6. </strong><br>
-                <code>FILTER (CONTAINS(LCASE(?name), \"poverty\"))</code>
+            <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?sdg (MAX(?value) - MIN(?value) AS ?range) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?sdg\nORDER BY DESC(?range)')">
+                <strong>6. SDGs with the widest variation in values across countries</strong><br>
+                <code>SELECT ?sdg (MAX(?value) - MIN(?value) AS ?range) WHERE {\n  ?obs a kg:Observation ;\n             kg:hasSDG ?sdg ;\n            kg:hasValue ?value .}\nGROUP BY ?sdg\nORDER BY DESC(?range)')</code>
             </div>
             <div class="example-query" onclick="setQuery('PREFIX kg: <http://www.semanticweb.org/ser531/KnowledgeGraph/>\n\nSELECT ?indicator ?name ?optimum ?greenThreshold ?redThreshold WHERE {\n  ?indicator a sdg:Indicator ;\n            sdg:indicatorName ?name ;\n            sdg:optimum ?optimum ;\n            sdg:greenThreshold ?greenThreshold ;\n            sdg:redThreshold ?redThreshold .\n}\nLIMIT 10')">
                 <strong>7. </strong><br>
