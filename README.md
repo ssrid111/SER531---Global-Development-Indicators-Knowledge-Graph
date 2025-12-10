@@ -63,3 +63,8 @@ project/
 ## Note
 
 This implementation provides everything **except the ontology**. You can plug in your own ontology later and everything will work seamlessly.
+
+## Changes made to the overall design after Deliverable 2 submission
+
+- We introduced observation pattern to the ontology to handle multi-literal values
+- Changed the application development phase of the implementation plan
